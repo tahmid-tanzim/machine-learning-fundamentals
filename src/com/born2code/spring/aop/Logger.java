@@ -10,16 +10,26 @@ import org.springframework.stereotype.Component;
 @Component
 public class Logger {
 
-    @Pointcut("execution(void com.born2code.spring.aop.Camera.snap())")
-    public void reusablePointCut(){}
+    /* reusablePointCut */
+    @Pointcut("execution(* com.born2code.spring.aop.Camera.*(..))")
+    public void cameraSnap(){}
 
-    @Before("reusablePointCut()")
+    /* reusablePointCut */
+    @Pointcut("execution(* *.*(..))")
+    public void cameraActivity(){}
+
+    @Before("cameraSnap()")
     public void aboutToTakePhoto() {
         System.out.println("About To Take Photo...");
     }
 
-    @After("reusablePointCut()")
+    @After("cameraSnap()")
     public void theEnd() {
         System.out.println("Bye...");
+    }
+
+    @Before("cameraActivity()")
+    public void cameraRelatedActivity() {
+        System.out.println("Doing something related to cameras...");
     }
 }

@@ -11,6 +11,7 @@
     <!--<bean id="logger" class="com.born2code.spring.aop.Logger"></bean>-->
     <context:annotation-config></context:annotation-config>
     <context:component-scan base-package="com.born2code.spring.aop"></context:component-scan>
+    <context:component-scan base-package="com.born2code.spring.camera.accessories"></context:component-scan>
     <!--
     <aop:config>
         // <aop:pointcut id="camerasnap" expression="execution(void com.born2code.spring.aop.Camera.snap())"></aop:pointcut>

@@ -10,10 +10,11 @@ public class App {
         Camera camera = (Camera) context.getBean("camera");
         Lens lens = (Lens) context.getBean("lens");
 
-        camera.snap();
-        camera.snap(1000);
-        camera.snap("GoodDay");
-        camera.snapNightTime();
+        try {
+            camera.snap();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
 
         lens.zoom(3);
 

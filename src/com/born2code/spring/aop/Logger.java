@@ -1,9 +1,7 @@
 package com.born2code.spring.aop;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Aspect
@@ -12,11 +10,8 @@ public class Logger {
 
     /* reusablePointCut */
     @Pointcut("execution(* com.born2code.spring.aop.Camera.*(..))")
-    public void cameraSnap(){}
-
-    /* reusablePointCut */
-    @Pointcut("execution(* *.*(..))")
-    public void cameraActivity(){}
+    public void cameraSnap() {
+    }
 
     @Before("cameraSnap()")
     public void aboutToTakePhoto() {
@@ -24,12 +19,30 @@ public class Logger {
     }
 
     @After("cameraSnap()")
-    public void theEnd() {
-        System.out.println("Bye...");
+    public void afterAdvice() {
+        System.out.println("After Advise...");
     }
 
-    @Before("cameraActivity()")
-    public void cameraRelatedActivity() {
-        System.out.println("Doing something related to cameras...");
+    @AfterReturning("cameraSnap()")
+    public void afterReturning() {
+        System.out.println("After Returning");
+    }
+
+    @AfterThrowing("cameraSnap()")
+    public void afterThrowing() {
+        System.out.println("After Throwing");
+    }
+
+    @Around("cameraSnap()")
+    public void aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
+        System.out.println("--- Around Advice (Before) ---");
+
+        try {
+            proceedingJoinPoint.proceed();
+        } catch (Throwable throwable) {
+            System.out.println("in Around Advice: " + throwable.getMessage());
+        }
+
+        System.out.println("--- Around Advice (After) ---");
     }
 }

@@ -9,40 +9,12 @@ import org.springframework.stereotype.Component;
 public class Logger {
 
     /* reusablePointCut */
-    @Pointcut("execution(* com.born2code.spring.aop.Camera.*(..))")
+    @Pointcut("within(void com.born2code.spring.aop.Camera.snap(..))")
     public void cameraSnap() {
     }
 
     @Before("cameraSnap()")
     public void aboutToTakePhoto() {
-        System.out.println("About To Take Photo...");
-    }
-
-    @After("cameraSnap()")
-    public void afterAdvice() {
-        System.out.println("After Advise...");
-    }
-
-    @AfterReturning("cameraSnap()")
-    public void afterReturning() {
-        System.out.println("After Returning");
-    }
-
-    @AfterThrowing("cameraSnap()")
-    public void afterThrowing() {
-        System.out.println("After Throwing");
-    }
-
-    @Around("cameraSnap()")
-    public void aroundAdvice(ProceedingJoinPoint proceedingJoinPoint) {
-        System.out.println("--- Around Advice (Before) ---");
-
-        try {
-            proceedingJoinPoint.proceed();
-        } catch (Throwable throwable) {
-            System.out.println("in Around Advice: " + throwable.getMessage());
-        }
-
-        System.out.println("--- Around Advice (After) ---");
+        System.out.println("Before Advice - About To Take Photo...");
     }
 }

@@ -1,39 +1,24 @@
 package com.born2code.spring.aop;
 
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
 public class Logger {
 
-    /* reusablePointCut */
-    @Pointcut("within(com.born2code.spring.aop.*)")
-    public void withinDemo() {
-    }
+
+    /* Sample PCD PointCut Designation: within, this, execute, target */
 
     /* reusablePointCut */
-    @Pointcut("target(com.born2code.spring.aop.Camera)")
-    public void targetDemo() {
+    @Pointcut("within(@org.springframework.stereotype.Component com.born2code.spring..*)")
+    public void somePointcut() {
     }
 
-    /* reusablePointCut */
-    @Pointcut("this(com.born2code.spring.aop.ICamera)")
-    public void thisDemo() {
-    }
-
-    @Before("withinDemo()")
-    public void withinBeforeDemo() {
-        System.out.println("*********** WITHIN DEMO *********");
-    }
-
-    @Before("targetDemo()")
-    public void targetBeforeDemo() {
-        System.out.println("*********** Target DEMO *********");
-    }
-
-    @Before("thisDemo()")
-    public void thisBeforeDemo() {
-        System.out.println("*********** This DEMO *********");
+    @Before("somePointcut()")
+    public void somePointcutDemo() {
+        System.out.println("*********** Before DEMO *********");
     }
 }

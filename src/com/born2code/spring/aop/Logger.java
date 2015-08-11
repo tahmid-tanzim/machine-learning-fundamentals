@@ -1,6 +1,5 @@
 package com.born2code.spring.aop;
 
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
@@ -9,12 +8,32 @@ import org.springframework.stereotype.Component;
 public class Logger {
 
     /* reusablePointCut */
-    @Pointcut("within(com.born2code.spring.aop.Camera)")
-    public void cameraSnap() {
+    @Pointcut("within(com.born2code.spring.aop.*)")
+    public void withinDemo() {
     }
 
-    @Before("cameraSnap()")
-    public void aboutToTakePhoto() {
-        System.out.println("Before Advice - About To Take Photo...");
+    /* reusablePointCut */
+    @Pointcut("target(com.born2code.spring.aop.Camera)")
+    public void targetDemo() {
+    }
+
+    /* reusablePointCut */
+    @Pointcut("this(com.born2code.spring.aop.ICamera)")
+    public void thisDemo() {
+    }
+
+    @Before("withinDemo()")
+    public void withinBeforeDemo() {
+        System.out.println("*********** WITHIN DEMO *********");
+    }
+
+    @Before("targetDemo()")
+    public void targetBeforeDemo() {
+        System.out.println("*********** Target DEMO *********");
+    }
+
+    @Before("thisDemo()")
+    public void thisBeforeDemo() {
+        System.out.println("*********** This DEMO *********");
     }
 }

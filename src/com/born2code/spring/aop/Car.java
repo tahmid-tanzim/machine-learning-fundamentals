@@ -5,6 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class Car {
     public void start() {
-        System.out.print("Car engine start");
+        System.out.println("Car engine start");
     }
 }

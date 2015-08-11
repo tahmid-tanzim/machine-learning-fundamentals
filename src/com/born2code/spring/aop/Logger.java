@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class Logger {
 
     /* reusablePointCut */
-    @Pointcut("within(void com.born2code.spring.aop.Camera.snap(..))")
+    @Pointcut("within(com.born2code.spring.aop.Camera)")
     public void cameraSnap() {
     }
 

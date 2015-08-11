@@ -13,7 +13,35 @@ public class Logger {
     /* Sample PCD PointCut Designation: within, this, execute, target */
 
     /* reusablePointCut */
-    @Pointcut("within(@org.springframework.stereotype.Component com.born2code.spring..*)")
+//    @Pointcut("within(@org.springframework.stereotype.Component com.born2code.spring..*)")
+//    public void somePointcut() {
+//    }
+//
+//    @Before("somePointcut()")
+//    public void somePointcutDemo() {
+//        System.out.println("*********** Before DEMO *********");
+//    }
+
+//    @Pointcut("@target(org.springframework.stereotype.Component)")
+//    public void somePointcut() {
+//    }
+//
+//    @Before("somePointcut()")
+//    public void somePointcutDemo() {
+//        System.out.println("*********** Before DEMO *********");
+//    }
+
+    /* @annotation is Method specific not class specific */
+//    @Pointcut("@annotation(java.lang.Deprecated)")
+//    public void somePointcut() {
+//    }
+//
+//    @Before("somePointcut()")
+//    public void somePointcutDemo() {
+//        System.out.println("*********** Before DEMO *********");
+//    }
+
+    @Pointcut("@args(org.springframework.stereotype.Component)")
     public void somePointcut() {
     }
 

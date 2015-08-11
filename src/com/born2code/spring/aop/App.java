@@ -11,8 +11,14 @@ public class App {
         Lens lens = (Lens) context.getBean("lens");
 
         camera.snap();
+        camera.snap(1000);
+        camera.snap("Hello World");
+        camera.snapNightTime();
+
         lens.zoom(5);
 
+        Car car = (Car) context.getBean("car");
+        camera.snapCar(car);
         ((ClassPathXmlApplicationContext) context).close();
     }
 }

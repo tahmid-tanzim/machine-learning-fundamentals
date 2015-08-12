@@ -11,8 +11,9 @@ public class App {
         Lens lens = (Lens) context.getBean("lens");
 
         camera.snap();
-        camera.snap(1000);
-        camera.snap("Hello World");
+        camera.snap(500);
+        camera.snap(1.8);
+        camera.snap(500, 1.8);
         camera.snapNightTime();
 
         lens.zoom(5);

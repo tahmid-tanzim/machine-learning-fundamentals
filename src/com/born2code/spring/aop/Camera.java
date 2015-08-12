@@ -2,8 +2,9 @@ package com.born2code.spring.aop;
 
 import org.springframework.stereotype.Component;
 
-@Component
+@Component("camera")
 public class Camera implements PhotoSnapper, ICamera {
+    @Override
     public void snap() {
         System.out.println("SNAP");
     }

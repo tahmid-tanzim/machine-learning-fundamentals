@@ -6,15 +6,10 @@
 python3 -m venv venv
 source venv/bin/activate
 pip install --upgrade pip
+pip freeze > requirements.txt
 ```
 
 Install Dependency
-```shell
-pip install numpy scipy matplotlib ipython scikit-learn pandas pillow notebook
-```
-
-OR 
-
 ```shell
 pip install -r requirements.txt
 ```
@@ -22,3 +17,5 @@ pip install -r requirements.txt
 ```shell
 jupyter notebook
 ```
+
+### Supervised Machine Learning

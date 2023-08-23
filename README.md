@@ -38,8 +38,14 @@ x - feature / input
 
 x ~> [f] ~> ŷ
 
+**Model**
 ```math
 f_{w,b}(x) = wx + b
+```
+
+So each model prediction can be written as
+```math
+ŷ^{(i)} == f_{w,b}(x^{(i)})
 ```
 
 #### Notation
@@ -55,16 +61,16 @@ f_{w,b}(x) = wx + b
 #### Cost Function
 The cost function will tell us how well the model is doing.
 
-Error is Prediction - Actual Target i.e. $`ŷ^{(i)} - y^{(i)}`$
+Error is (Prediction - Actual Target) i.e. $`ŷ^{(i)} - y^{(i)}`$
 
 ```math
 J(w,b) = \left(1 \over 2m \right) \sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
 ```
-The cost function is denoted as $`J(w,b)`$
+The cost function is denoted as $`J(w,b)`$ also known squared error cost function.
 
 Find $`w, b`$: $`ŷ^{(i)}`$ is close to $`y^{(i)}`$ for all ($`x^{(i)}, y^{(i)}`$)
 
-
+Goal is to minimize the cost i.e. $`J(w,b)`$
 
 
 #### 2.1.2. Polynomial Regression Model

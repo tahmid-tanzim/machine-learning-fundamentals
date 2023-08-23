@@ -43,14 +43,14 @@ f_{w,b}(x) = wx + b
 ```
 
 ##### Notation
-| General Notation      |           Description           |   Python variable |
-|:----------------------|:-------------------------------:|------------------:|
-| x                     | Training example feature values |         `x_train` |
-| y                     |    Training example targets     |         `y_train` |
-| $`\x^{(i)}, y^{(i)}`$ | $`\i^{(th)}`$ Training example  |      `x_i`, `y_i` |
-| m                     |   Number of training examples   |               `m` |
-| $`\w`$                |        parameter: weight        |               `w` |
-| $`\b`$                |         parameter: bias         |               `b` |
+| General Notation     |           Description           |   Python variable |
+|:---------------------|:-------------------------------:|------------------:|
+| x                    | Training example feature values |         `x_train` |
+| y                    |    Training example targets     |         `y_train` |
+| $`x^{(i)}, y^{(i)}`$ |  $`i^{(th)}`$ Training example  |      `x_i`, `y_i` |
+| m                    |   Number of training examples   |               `m` |
+| $`w`$                |        parameter: weight        |               `w` |
+| $`b`$                |         parameter: bias         |               `b` |
 
 
 #### 2.1.2. Polynomial Regression Model

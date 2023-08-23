@@ -94,6 +94,8 @@ $$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
 \;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
  b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
 \end{align*}$$
+
+
 where, parameters $w$, $b$ are updated simultaneously.  
 The gradient is defined as:
 $$

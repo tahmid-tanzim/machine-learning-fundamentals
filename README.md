@@ -55,9 +55,13 @@ f_{w,b}(x) = wx + b
 #### Cost Function
 the cost function will tell us how well the model is doing.
 
+Error = $`ŷ^{(i)} - y^{(i)`$
+
 ```math
 \sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
 ```
+
+Find w, b: $`ŷ^{(i)}`$ is close to $`y^{(i)`$ for all ($`x^{(i)}, y^{(i)}`$)
 
 
 

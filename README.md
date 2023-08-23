@@ -53,13 +53,14 @@ f_{w,b}(x) = wx + b
 | $`b`$ (scalar)       |         parameter: bias         |               `b` |
 
 #### Cost Function
-the cost function will tell us how well the model is doing.
+The cost function will tell us how well the model is doing.
 
 Error is Prediction - Actual Target i.e. $`ŷ^{(i)} - y^{(i)}`$
 
 ```math
-\sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
+J(w,b) = \sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
 ```
+The cost function is denoted as $`J(w,b)`$
 
 Find $`w, b`$: $`ŷ^{(i)}`$ is close to $`y^{(i)}`$ for all ($`x^{(i)}, y^{(i)}`$)
 

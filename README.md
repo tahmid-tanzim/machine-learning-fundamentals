@@ -78,8 +78,11 @@ The cost function is denoted as $`J(w,b)`$ also known squared error cost functio
 
 Find $`w, b`$: $`ŷ^{(i)}`$ is close to $`y^{(i)}`$ for all ($`x^{(i)}, y^{(i)}`$)
 
-Goal is to minimize the cost i.e. $`J(w,b)`$
 
+##### Gradient Descent
+Goal is to minimize the cost i.e. $`min_{w,b} J(w,b)`$
+
+Start with some $`w,b`$ keep changing $`w,b`$ to reduce $`J(w,b)`$ until we settle at or near a minimum.
 
 #### 2.1.2. Polynomial Regression Model
 

@@ -56,7 +56,7 @@ f_{w,b}(x) = wx + b
 the cost function will tell us how well the model is doing.
 
 ```math
-\sum_{i=1}^m (y^{(i)} - y^{(i)})^2
+\sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
 ```
 
 

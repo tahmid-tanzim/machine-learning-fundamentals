@@ -42,7 +42,7 @@ x ~> [f] ~> ŷ
 f_{w,b}(x) = wx + b
 ```
 
-##### Notation
+#### Notation
 | General Notation     |           Description           |   Python variable |
 |:---------------------|:-------------------------------:|------------------:|
 | **x** (vector)       | Training example feature values |         `x_train` |
@@ -51,6 +51,15 @@ f_{w,b}(x) = wx + b
 | m (scalar)           |   Number of training examples   |               `m` |
 | $`w`$ (scalar)       |        parameter: weight        |               `w` |
 | $`b`$ (scalar)       |         parameter: bias         |               `b` |
+
+#### Cost Function
+the cost function will tell us how well the model is doing.
+
+```math
+1/m sum_{i=1}^m (ŷ^{(i) - y^{(i)})^2
+```
+
+
 
 
 #### 2.1.2. Polynomial Regression Model

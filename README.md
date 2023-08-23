@@ -84,6 +84,27 @@ Goal is to minimize the cost i.e. $`min_{w,b} J(w,b)`$
 
 Start with some $`w,b`$ keep changing $`w,b`$ to reduce $`J(w,b)`$ until we settle at or near a minimum.
 
+##### Gradient Descent Algorithms
+Repeat until convergence
+
+$`\alpha`$ is Learning Rate
+$`\partial`$ is derivatives
+
+$$\begin{align*} \text{repeat}&\text{ until convergence:} \; \lbrace \newline
+\;  w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \tag{3}  \; \newline 
+ b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}  \newline \rbrace
+\end{align*}$$
+where, parameters $w$, $b$ are updated simultaneously.  
+The gradient is defined as:
+$$
+\begin{align}
+\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)} \tag{4}\\
+  \frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)}) \tag{5}\\
+\end{align}
+$$
+
+Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
+
 #### 2.1.2. Polynomial Regression Model
 
 

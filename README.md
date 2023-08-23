@@ -64,11 +64,11 @@ The cost function will tell us how well the model is doing.
 Error is (Prediction - Actual Target) i.e. $`ŷ^{(i)} - y^{(i)}`$
 
 ```math
-J(w,b) = \left(1 \over 2m \right) \sum_{i=1}^m (ŷ^{(i)} - y^{(i)})^2
+J(w,b) = \left(1 \over 2m \right) \sum_{i=0}^{m-1} (ŷ^{(i)} - y^{(i)})^2
 ```
 or
 ```math
-J(w,b) = \left(1 \over 2m \right) \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2
+J(w,b) = \left(1 \over 2m \right) \sum_{i=0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2
 ```
 or
 ```math

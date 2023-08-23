@@ -39,7 +39,7 @@ x - feature / input
 x ~> [f] ~> ŷ
 
 ```math
-f{_w_,_b}(x) = wx + b
+f_{w,b}(x) = wx + b
 ```
 
 #### 2.1.2. Polynomial Regression Model

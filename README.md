@@ -72,7 +72,7 @@ J(w,b) = \left(1 \over 2m \right) \sum_{i=1}^m (f_{w,b}(x^{(i)}) - y^{(i)})^2
 ```
 or
 ```math
-J(w,b) = \left(1 \over 2m \right) \sum_{i=1}^m ((w * x^{(i)} + b) - y^{(i)})^2
+J(w,b) = \left(1 \over 2m \right) \sum_{i=0}^{m-1} ((w * x^{(i)} + b) - y^{(i)})^2
 ```
 The cost function is denoted as $`J(w,b)`$ also known squared error cost function.
 

@@ -128,12 +128,12 @@ Here *simultaneously* means that you calculate the partial derivatives for all t
 Model Function will be in dot product
 
 ```math
-f_{\vec w,b}(\vec x) = (\vec w)  .  (\vec x) + b
+f_{\vec w,b}(\vec x) = \vec w . \vec x + b
 ```
 
 Here
 ```math
-(\vec w) . (\vec x) = w_1 * x_1 + w_2 * x_2 + w_3 * x_3 .... w_n * x_n
+\vec w . \vec x = w_1 * x_1 + w_2 * x_2 + w_3 * x_3 .... w_n * x_n
 ```
 
 #### 2.1.2. Polynomial Regression Model

@@ -173,6 +173,16 @@ $$
     
 *  $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ is the model's prediction, while $y^{(i)}$ is the target value
 
+#### Feature Scaling
+
+* Divide by Maximum
+* Mean Normalization
+
+300 <= $`x_1`$ <= 2000
+
+```math
+x_1 = x_1 - μ_1 \over 2000 - 300
+```
 
 
 #### 2.1.2. Polynomial Regression Model

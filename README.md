@@ -116,12 +116,13 @@ The gradient is defined as:
 \end{align}
 ```
 
-Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
+Here *simultaneously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
 
 #### Multiple Linear Regression
 * $`x_j`$ = $`j^{th}`$ feature
 * $`n`$ = number of features 
 * $`x^{(i)}`$ = features of $`i^{th}`$ training example
+* $`x_j^{(i)}`$ = the value of features $`j`$ in $`i^{th}`$ training example
 
 #### 2.1.2. Polynomial Regression Model
 

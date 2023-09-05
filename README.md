@@ -119,6 +119,7 @@ The gradient is defined as:
 Here *simultaneously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
 
 #### Multiple Linear Regression
+* $`\vec x`$ = is a vector not a number
 * $`\vec x_j`$ = $`j^{th}`$ feature
 * $`n`$ = number of features 
 * $`\vec x^{(i)}`$ = features of $`i^{th}`$ training example

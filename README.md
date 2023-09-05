@@ -190,14 +190,15 @@ x_1 = \left(x_1 - μ_1 \over σ \right)
 ```
 
 To implement z-score normalization, adjust your input values as shown in this formula:
-$$x^{(i)}_j = \dfrac{x^{(i)}_j - \mu_j}{\sigma_j} \tag{4}$$ 
+
+$$x^{(i)}_j = \dfrac{x^{(i)}_j - \mu_j}{\sigma_j}$$ 
 where $j$ selects a feature or a column in the $\mathbf{X}$ matrix. $µ_j$ is the mean of all the values for feature (j) and $\sigma_j$ is the standard deviation of feature (j).
 $$
 \begin{align}
-\mu_j &= \frac{1}{m} \sum_{i=0}^{m-1} x^{(i)}_j \tag{5}\\
+
+\mu_j &= \frac{1}{m} \sum_{i=0}^{m-1} x^{(i)}_j \\
 \sigma^2_j &= \frac{1}{m} \sum_{i=0}^{m-1} (x^{(i)}_j - \mu_j)^2  \tag{6}
-\end{align}
-$$
+\end{align}$$
 
 #### 2.1.2. Polynomial Regression Model
 

@@ -91,11 +91,11 @@ $`\alpha`$ is Learning Rate
 
 $`\partial`$ is derivatives
 
-So far in this course, you have developed a linear model that predicts $`f_{w,b}(x^{(i)})`$:
+So far we have developed a linear model that predicts $`f_{w,b}(x^{(i)})`$:
 ```math
 f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{1}
 ```
-In linear regression, you utilize input training data to fit the parameters $`w`$,$`b`$ by minimizing a measure of the error between our predictions $`f_{w,b}(x^{(i)})`$ and the actual data $`y^{(i)}`$. The measure is called the $`cost`$, $`J(w,b)`$. In training you measure the cost over all of our training samples $`x^{(i)},y^{(i)}`$
+In linear regression, we utilize input training data to fit the parameters $`w`$,$`b`$ by minimizing a measure of the error between our predictions $`f_{w,b}(x^{(i)})`$ and the actual data $`y^{(i)}`$. The measure is called the $`cost`$, $`J(w,b)`$. In training we measure the cost over all of our training samples $`x^{(i)},y^{(i)}`$
 ```math
 J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2\tag{2}
 ``` 
@@ -117,6 +117,11 @@ The gradient is defined as:
 ```
 
 Here *simultaniously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
+
+#### Multiple Linear Regression
+* $`x_j`$ = $`j^{th}`$ feature
+* $`n`$ = number of features 
+* $`x^{(i)}`$ = features of $`i^{th}`$ training example
 
 #### 2.1.2. Polynomial Regression Model
 

@@ -127,11 +127,6 @@ Here *simultaneously* means that you calculate the partial derivatives for all t
 
 ### Model Prediction With Multiple Variables
 
-$$ f_{\mathbf{w},b}(\mathbf{x}) =  w_0x_0 + w_1x_1 +... + w_{n-1}x_{n-1} + b \tag{1}$$
-or in vector notation:
-$$ f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b  \tag{2} $$ 
-where $\cdot$ is a vector `dot product`
-
 
 ```math
 f_{\vec w,b}(\vec x) = \vec w . \vec x + b
@@ -146,6 +141,15 @@ Here
 ```math
 f = np.dot(w, x) + b
 ```
+
+#### Compute Cost With Multiple Variables
+The equation for the cost function with multiple variables $J(\mathbf{w},b)$ is:
+$$J(\mathbf{w},b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{\mathbf{w},b}(\mathbf{x}^{(i)}) - y^{(i)})^2 \tag{3}$$ 
+where:
+$$ f_{\mathbf{w},b}(\mathbf{x}^{(i)}) = \mathbf{w} \cdot \mathbf{x}^{(i)} + b  \tag{4} $$ 
+
+
+In contrast to previous labs, $\mathbf{w}$ and $\mathbf{x}^{(i)}$ are vectors rather than scalars supporting multiple features.
 
 #### Gradient Descent for Multiple Features
 

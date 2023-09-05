@@ -119,11 +119,17 @@ The gradient is defined as:
 Here *simultaneously* means that you calculate the partial derivatives for all the parameters before updating any of the parameters.
 
 #### Multiple Linear Regression
-* $`\vec x`$ = [$`x_1, x_2, x_3 ... x_n`$]
+* $`\vec x`$ = [$`x_1, x_2, x_3 ..... x_n`$]
 * $`\vec x_j`$ = $`j^{th}`$ feature
 * $`n`$ = number of features 
 * $`\vec x^{(i)}`$ = features of $`i^{th}`$ training example
 * $`\vec x_j^{(i)}`$ = the value of features $`j`$ in $`i^{th}`$ training example
+
+Model Function will be
+
+```math
+f_{\vec w,b}(\vec x) = \vec w \dot \vec x + b
+```
 
 #### 2.1.2. Polynomial Regression Model
 

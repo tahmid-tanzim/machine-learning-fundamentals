@@ -128,7 +128,7 @@ Here *simultaneously* means that you calculate the partial derivatives for all t
 Model Function will be
 
 ```math
-f_{\vec w,b}(\vec x) = \vec w \dot \vec x + b
+f_{(\vec w),b}(\vec x) = (\vec w) \dot (\vec x) + b
 ```
 
 #### 2.1.2. Polynomial Regression Model

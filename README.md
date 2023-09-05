@@ -184,6 +184,11 @@ $$
 x_1 = \left(x_1 - μ_1 \over 2000 - 300 \right)
 ```
 
+* Z-score Normalization
+```math
+x_1 = \left(x_1 - μ_1 \over σ \right)
+   
+```
 
 #### 2.1.2. Polynomial Regression Model
 

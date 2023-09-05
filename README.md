@@ -125,7 +125,13 @@ Here *simultaneously* means that you calculate the partial derivatives for all t
 * $`\vec x^{(i)}`$ = features of $`i^{th}`$ training example
 * $`\vec x_j^{(i)}`$ = the value of features $`j`$ in $`i^{th}`$ training example
 
-Model Function will be in dot product
+### Model Prediction With Multiple Variables
+
+$$ f_{\mathbf{w},b}(\mathbf{x}) =  w_0x_0 + w_1x_1 +... + w_{n-1}x_{n-1} + b \tag{1}$$
+or in vector notation:
+$$ f_{\mathbf{w},b}(\mathbf{x}) = \mathbf{w} \cdot \mathbf{x} + b  \tag{2} $$ 
+where $\cdot$ is a vector `dot product`
+
 
 ```math
 f_{\vec w,b}(\vec x) = \vec w . \vec x + b
@@ -140,6 +146,9 @@ Here
 ```math
 f = np.dot(w, x) + b
 ```
+
+#### Gradient Descent for Multiple Features
+
 
 #### 2.1.2. Polynomial Regression Model
 

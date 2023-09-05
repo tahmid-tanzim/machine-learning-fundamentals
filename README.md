@@ -136,6 +136,11 @@ Here
 \vec w . \vec x = w_1 * x_1 + w_2 * x_2 + w_3 * x_3 .... w_n * x_n
 ```
 
+#### Vectorization
+```math
+f = np.dot(w, x) + b
+```
+
 #### 2.1.2. Polynomial Regression Model
 
 

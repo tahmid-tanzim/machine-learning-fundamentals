@@ -70,6 +70,7 @@ opentelemetry-util-http==0.48b0
 orjson==3.10.7
 overrides==7.7.0
 packaging==24.1
+pandas==2.2.2
 posthog==3.6.3
 protobuf==4.25.4
 pyasn1==0.6.0
@@ -81,6 +82,7 @@ PyPika==0.48.9
 pyproject_hooks==1.1.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
+pytz==2024.1
 PyYAML==6.0.2
 requests==2.32.3
 requests-oauthlib==2.0.0

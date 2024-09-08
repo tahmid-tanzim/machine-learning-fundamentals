@@ -163,3 +163,4 @@ cython_debug/
 .idea/
 
 RAG/vector_db
+RAG/app/vectorstore

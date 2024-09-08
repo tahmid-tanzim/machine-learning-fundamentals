@@ -4,3 +4,5 @@
 ### Groq Cloud - https://console.groq.com/
 ### LangChain - https://www.langchain.com/
 ### ChromaDB - https://www.trychroma.com/
+
+streamlit run ./app/main.py

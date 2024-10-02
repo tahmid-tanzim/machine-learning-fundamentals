@@ -14,11 +14,12 @@ huggingface-hub==0.25.1
 idna==3.10
 multidict==6.1.0
 multiprocess==0.70.14
-numpy==2.1.1
+numpy==1.26.4
 packaging==24.1
 pandas==2.2.3
 portalocker==2.10.1
 pyarrow==17.0.0
+pybind11==2.13.6
 python-dateutil==2.9.0.post0
 pytz==2024.2
 PyYAML==6.0.2

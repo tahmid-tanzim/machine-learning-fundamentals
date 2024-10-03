@@ -161,27 +161,28 @@ class SummarizeDialogue:
             print(self.dash_line)
             print("INPUT PROMPT:\n", prompt, end="\n")
             print(self.dash_line)
-            print("BASELINE HUMAN SUMMARY:", summary, end="\n")
-            print("MODEL GENERATION - ZERO SHOT:", decoded_dialogue, end="\n")
+            print("BASELINE HUMAN SUMMARY:\n", summary, end="\n")
+            print("MODEL GENERATION - ZERO SHOT:\n", decoded_dialogue, end="\n")
 
     def summarize_dialogue_with_one_shot_inference(self):
         for i, index in enumerate(self.test_data_indices):
-            dialogue = self.dataset["test"][index]["dialogue"]
-            summary = self.dataset["test"][index]["summary"]
-            topic = self.dataset["test"][index]["topic"]
+            test_dialogue = self.dataset["test"][index]["dialogue"]
+            test_summary = self.dataset["test"][index]["summary"]
+            test_topic = self.dataset["test"][index]["topic"]
 
-            # Prepare one shot prompt
-            training_data_index = self.get_random_type_indices("train", topic, 1).pop()
-            one_shot_dialogue = self.dataset["train"][training_data_index]["dialogue"]
-            one_shot_summary = self.dataset["train"][training_data_index]["summary"]
-            one_shot_prompt = f"Dialogue:\n{one_shot_dialogue}\nSummary:\n{one_shot_summary}\n"
+            # Train Prompt
+            training_data_index = self.get_random_type_indices("train", test_topic, 1).pop()
+            train_dialogue = self.dataset["train"][training_data_index]["dialogue"]
+            train_summary = self.dataset["train"][training_data_index]["summary"]
+            train_prompt = f"Dialogue:\n{train_dialogue}\nSummary:\n{train_summary}\n"
 
-            prompt = f"{one_shot_prompt}\nDialogue:\n{dialogue}\nSummary:\n"
+            # Test Prompt
+            one_shot_prompt = f"{train_prompt}\nDialogue:\n{test_dialogue}\nSummary:\n"
 
-            encoded_dialogue = self.tokenizer(prompt, return_tensors="pt")
-            decoded_dialogue = self.tokenizer.decode(
+            encoded_prompt = self.tokenizer(one_shot_prompt, return_tensors="pt")
+            test_summary_prediction = self.tokenizer.decode(
                 self.model.generate(
-                    encoded_dialogue["input_ids"],
+                    encoded_prompt["input_ids"],
                     max_new_tokens=50,
                 )[0],
                 skip_special_tokens=True
@@ -189,42 +190,45 @@ class SummarizeDialogue:
             print(self.dash_line)
             print("Example ", i + 1)
             print(self.dash_line)
-            print("INPUT PROMPT:\n", prompt, end="\n")
+            print("INPUT PROMPT:\n", one_shot_prompt, end="\n")
             print(self.dash_line)
-            print("BASELINE HUMAN SUMMARY:", summary, end="\n")
-            print("MODEL GENERATION - ONE SHOT:", decoded_dialogue, end="\n")
+            print("BASELINE HUMAN SUMMARY:\n", test_summary, end="\n")
+            print("MODEL GENERATION - ONE SHOT:\n", test_summary_prediction, end="\n")
 
-    # def summarize_dialogue_with_few_shot_inference(self, training_data_indices=[100, 300, 500]):
-    #     # Prepare few shot prompt
-    #     few_shot_prompt = ""
-    #     for i, training_index in enumerate(training_data_indices):
-    #         few_shot_dialogue = self.dataset["test"][training_index]["dialogue"]
-    #         few_shot_summary = self.dataset["test"][training_index]["summary"]
-    #         few_shot_prompt += f"\nDialogue #{i + 1}:\n{few_shot_dialogue}\nSummary #{i + 1}:\n{few_shot_summary}\n"
-    #
-    #     # Preparing test prompt
-    #     final_index = len(training_data_indices) + 1
-    #     for i, index in enumerate(self.test_data_indices):
-    #         dialogue = self.dataset["test"][index]["dialogue"]
-    #         summary = self.dataset["test"][index]["summary"]
-    #
-    #         prompt = f"{few_shot_prompt}\nDialogue #{final_index}:\n{dialogue}\nSummary #{final_index}:\n"
-    #
-    #         encoded_dialogue = self.tokenizer(prompt, return_tensors="pt")
-    #         decoded_dialogue = self.tokenizer.decode(
-    #             self.model.generate(
-    #                 encoded_dialogue["input_ids"],
-    #                 max_new_tokens=50,
-    #             )[0],
-    #             skip_special_tokens=True
-    #         )
-    #         print(self.dash_line)
-    #         print("Example ", i + 1)
-    #         print(self.dash_line)
-    #         print("INPUT PROMPT:\n", prompt, end="\n")
-    #         print(self.dash_line)
-    #         print("BASELINE HUMAN SUMMARY:", summary, end="\n")
-    #         print("MODEL GENERATION - FEW SHOT:", decoded_dialogue, end="\n")
+    def summarize_dialogue_with_few_shot_inference(self):
+        for i, index in enumerate(self.test_data_indices):
+            test_dialogue = self.dataset["test"][index]["dialogue"]
+            test_summary = self.dataset["test"][index]["summary"]
+            test_topic = self.dataset["test"][index]["topic"]
+
+            # Train Prompt
+            train_prompt = ""
+            training_data_indices = self.get_random_type_indices("train", test_topic, 3)
+            j = 1
+            for training_index in training_data_indices:
+                train_dialogue = self.dataset["train"][training_index]["dialogue"]
+                train_summary = self.dataset["train"][training_index]["summary"]
+                train_prompt += f"\nDialogue #{j}:\n{train_dialogue}\nSummary #{j}:\n{train_summary}\n"
+                j += 1
+
+            # Test Prompt
+            few_shot_prompt = f"{train_prompt}\nDialogue #{j}:\n{test_dialogue}\nSummary #{j}:\n"
+
+            encoded_prompt = self.tokenizer(few_shot_prompt, return_tensors="pt")
+            test_summary_prediction = self.tokenizer.decode(
+                self.model.generate(
+                    encoded_prompt["input_ids"],
+                    max_new_tokens=50,
+                )[0],
+                skip_special_tokens=True
+            )
+            print(self.dash_line)
+            print("Example ", i + 1)
+            print(self.dash_line)
+            print("INPUT PROMPT:\n", few_shot_prompt, end="\n")
+            print(self.dash_line)
+            print("BASELINE HUMAN SUMMARY:\n", test_summary, end="\n")
+            print("MODEL GENERATION - FEW SHOT:\n", test_summary_prediction, end="\n")
 
 
 if __name__ == "__main__":
@@ -234,6 +238,6 @@ if __name__ == "__main__":
     # sd.explore_dataset_by_type("job application", "train")
     # sd.summarize_dialogue_without_prompt_engineering()
     # sd.summarize_dialogue_with_zero_shot_inference()
-    sd.summarize_dialogue_with_one_shot_inference()
-    # sd.summarize_dialogue_with_few_shot_inference()
+    # sd.summarize_dialogue_with_one_shot_inference()
+    sd.summarize_dialogue_with_few_shot_inference()
 

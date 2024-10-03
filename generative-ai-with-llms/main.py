@@ -7,7 +7,10 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, GenerationConfig
 class SummarizeDialogue:
     # transportation -> 40
     # job application -> 220
-    test_data_indices = [40, 220]
+    # test_data_indices = [40, 220]
+
+    # order food
+    test_data_indices = [524, 1065]
     type_indices = {
         "test": {
             "transportation": [
@@ -18,9 +21,13 @@ class SummarizeDialogue:
             "job application": [
                 219,
                 220
-            ]
+            ],
+            "order food": [521, 523, 524, 1008, 1011, 1014, 1065, 1365, 1367, 1472],
         },
         "train": {
+            "birthday": [5, 44, 498, 701, 2534, 2582, 6097, 6427, 6741, 8014, 9096],
+            "dance": [4, 105, 1643, 3133, 3428, 5663, 7455, 8221, 8458, 11273],
+            "take a bus": [26, 1365, 1924, 2824, 4430, 7515, 7972, 8774, 10104, 11223, 12362],
             "transportation": [
                 710,
                 1492,
@@ -51,7 +58,13 @@ class SummarizeDialogue:
                 9379,
                 10472,
                 10847
-            ]
+            ],
+            "order food": [30, 83, 84, 122, 297, 530, 609, 1002, 1097, 1279, 1301, 1506, 1522, 1571, 1572, 1670, 1856,
+                           2271, 2283, 2764, 3150, 3499, 3620, 3789, 3856, 3997, 4071, 4212, 4213, 4372, 4400, 4413,
+                           4591, 4643, 4722, 4736, 5060, 5082, 5147, 5462, 5563, 5746, 6030, 6068, 6227, 6372, 6376,
+                           6721, 7266, 7273, 7577, 7586, 7718, 7861, 8246, 8247, 8267, 8395, 8643, 8938, 8957, 9317,
+                           9349, 9595, 9878, 9945, 10201, 10206, 11122, 11127, 11617, 11619, 11761, 11762, 11872, 12220,
+                           12245, 12333, 12450],
         }
     }
 
@@ -83,29 +96,30 @@ class SummarizeDialogue:
             print("TOPIC:\n", self.dataset[dataset_type][index]["topic"], end="\n")
             print(self.dash_line, end="\n")
 
-    def explore_dataset_by_type(self, topic, dataset_type="train"):
+    def explore_dataset_by_type(self, dataset_type="train"):
         # Viewing Datasets
-        count = 20
+        topic_frequency = dict()
         print(self.dash_line)
         print("Explore Dataset Type:", dataset_type)
         index = 0
         for item in self.dataset[dataset_type]:
-            if count <= 0:
-                break
-            elif item["topic"] == topic:
-                print(self.dash_line)
-                print("INDEX:\n", index, end="\n")
-                print(self.dash_line)
-                print("ID:\n", item["id"], end="\n")
-                print(self.dash_line)
-                print("DIALOGUE:\n", item["dialogue"], end="\n")
-                print(self.dash_line)
-                print("SUMMARY:\n", item["summary"], end="\n")
-                print(self.dash_line)
-                print("TOPIC:\n", item["topic"], end="\n")
-                print(self.dash_line, end="\n")
-                count -= 1
+            if item["topic"] not in topic_frequency:
+                topic_frequency[item["topic"]] = []
+            topic_frequency[item["topic"]].append(index)
+
+            # print(self.dash_line)
+            # print("INDEX:\n", index, end="\n")
+            # print(self.dash_line)
+            # print("ID:\n", item["id"], end="\n")
+            # print(self.dash_line)
+            # print("DIALOGUE:\n", item["dialogue"], end="\n")
+            # print(self.dash_line)
+            # print("SUMMARY:\n", item["summary"], end="\n")
+            # print(self.dash_line)
+            # print("TOPIC:\n", item["topic"], end="\n")
+            # print(self.dash_line, end="\n")
             index += 1
+        print("Topic Frequency:\n", topic_frequency)
 
     def get_random_type_indices(self, dataset_type: str, topic: str, max_size: int = 0) -> set:
         if max_size <= 0 or len(self.type_indices[dataset_type][topic]) < max_size:
@@ -250,14 +264,7 @@ class SummarizeDialogue:
             # Test Prompt
             few_shot_prompt = f"{train_prompt}\nDialogue #{j}:\n{test_dialogue}\nSummary #{j}:\n"
 
-            # generation_config = GenerationConfig(max_new_tokens=50)
-
-            # Less temperature is more random + too much creative
-            # generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=0.1)
-            generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=0.5)
-
-            # More temperature is less random
-            # generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=1.0)
+            generation_config = GenerationConfig(max_new_tokens=60, do_sample=True, temperature=1)
 
             encoded_prompt = self.tokenizer(few_shot_prompt, return_tensors="pt")
             test_summary_prediction = self.tokenizer.decode(
@@ -280,8 +287,7 @@ class SummarizeDialogue:
 if __name__ == "__main__":
     sd = SummarizeDialogue()
     # sd.view_dataset("test")
-    # sd.explore_dataset_by_type("transportation", "test")
-    # sd.explore_dataset_by_type("job application", "train")
+    # sd.explore_dataset_by_type("test")
     # sd.summarize_dialogue_without_prompt_engineering()
     # sd.summarize_dialogue_with_zero_shot_inference()
     # sd.summarize_dialogue_with_one_shot_inference()

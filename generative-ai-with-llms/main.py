@@ -5,12 +5,13 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, GenerationConfig
 
 
 class SummarizeDialogue:
+    # transportation -> 40
+    # job application -> 220
     test_data_indices = [40, 220]
     type_indices = {
         "test": {
             "transportation": [
                 4,
-                40,
                 481,
                 482
             ],
@@ -223,7 +224,52 @@ class SummarizeDialogue:
                 skip_special_tokens=True
             )
             print(self.dash_line)
-            print("Example ", i + 1)
+            print("Example ", i + 1, f"\nTopic: {test_topic}")
+            print(self.dash_line)
+            print("INPUT PROMPT:\n", few_shot_prompt, end="\n")
+            print(self.dash_line)
+            print("BASELINE HUMAN SUMMARY:\n", test_summary, end="\n")
+            print("MODEL GENERATION - FEW SHOT:\n", test_summary_prediction, end="\n")
+
+    def summarize_dialogue_with_few_shot_generative_configuration(self):
+        for i, index in enumerate(self.test_data_indices):
+            test_dialogue = self.dataset["test"][index]["dialogue"]
+            test_summary = self.dataset["test"][index]["summary"]
+            test_topic = self.dataset["test"][index]["topic"]
+
+            # Train Prompt
+            train_prompt = ""
+            training_data_indices = self.get_random_type_indices("train", test_topic, 4)
+            j = 1
+            for training_index in training_data_indices:
+                train_dialogue = self.dataset["train"][training_index]["dialogue"]
+                train_summary = self.dataset["train"][training_index]["summary"]
+                train_prompt += f"\nDialogue #{j}:\n{train_dialogue}\nSummary #{j}:\n{train_summary}\n"
+                j += 1
+
+            # Test Prompt
+            few_shot_prompt = f"{train_prompt}\nDialogue #{j}:\n{test_dialogue}\nSummary #{j}:\n"
+
+            # generation_config = GenerationConfig(max_new_tokens=50)
+
+            # Less temperature is more random + too much creative
+            # generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=0.1)
+            generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=0.5)
+
+            # More temperature is less random
+            # generation_config = GenerationConfig(max_new_tokens=50, do_sample=True, temperature=1.0)
+
+            encoded_prompt = self.tokenizer(few_shot_prompt, return_tensors="pt")
+            test_summary_prediction = self.tokenizer.decode(
+                self.model.generate(
+                    encoded_prompt["input_ids"],
+                    generation_config=generation_config,
+                )[0],
+                skip_special_tokens=True
+            )
+
+            print(self.dash_line)
+            print("Example ", i + 1, f"\nTopic: {test_topic}")
             print(self.dash_line)
             print("INPUT PROMPT:\n", few_shot_prompt, end="\n")
             print(self.dash_line)
@@ -239,5 +285,5 @@ if __name__ == "__main__":
     # sd.summarize_dialogue_without_prompt_engineering()
     # sd.summarize_dialogue_with_zero_shot_inference()
     # sd.summarize_dialogue_with_one_shot_inference()
-    sd.summarize_dialogue_with_few_shot_inference()
-
+    # sd.summarize_dialogue_with_few_shot_inference()
+    sd.summarize_dialogue_with_few_shot_generative_configuration()

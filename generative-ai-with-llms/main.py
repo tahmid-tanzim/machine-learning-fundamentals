@@ -81,9 +81,38 @@ class SummarizeDialogue:
             print('BASELINE HUMAN SUMMARY:', summary, end='\n')
             print('MODEL GENERATION - ZERO SHOT:', decoded_dialogue, end='\n')
 
+    def summarize_dialogue_with_one_shot_inference(self, one_shot_index=100):
+        # Prepare one shot prompt
+        one_shot_dialogue = self.dataset['test'][one_shot_index]['dialogue']
+        one_shot_summary = self.dataset['test'][one_shot_index]['summary']
+        one_shot_prompt = f"Dialogue:\n{one_shot_dialogue}\nSummary:\n{one_shot_summary}\n"
+
+        for i, index in enumerate(self.example_indices):
+            dialogue = self.dataset['test'][index]['dialogue']
+            summary = self.dataset['test'][index]['summary']
+
+            prompt = f"{one_shot_prompt}\nDialogue:\n{dialogue}\nSummary:\n"
+
+            encoded_dialogue = self.tokenizer(prompt, return_tensors="pt")
+            decoded_dialogue = self.tokenizer.decode(
+                self.model.generate(
+                    encoded_dialogue["input_ids"],
+                    max_new_tokens=50,
+                )[0],
+                skip_special_tokens=True
+            )
+            print(self.dash_line)
+            print('Example ', i + 1)
+            print(self.dash_line)
+            print('INPUT PROMPT:\n', prompt, end='\n')
+            print(self.dash_line)
+            print('BASELINE HUMAN SUMMARY:', summary, end='\n')
+            print('MODEL GENERATION - ONE SHOT:', decoded_dialogue, end='\n')
+
 
 if __name__ == "__main__":
     sd = SummarizeDialogue()
     # sd.view_dataset()
-    sd.summarize_dialogue_without_prompt_engineering()
-    sd.summarize_dialogue_with_zero_shot_inference()
+    # sd.summarize_dialogue_without_prompt_engineering()
+    # sd.summarize_dialogue_with_zero_shot_inference()
+    sd.summarize_dialogue_with_one_shot_inference()
